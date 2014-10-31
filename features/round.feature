@@ -15,8 +15,11 @@ Feature: Playing a round
   Scenario: 
     * Player 1 rolls J J Q Q K (two pair)
     * Player 2 rolls 9 9 T K A (one pair)
-    * Player 1 rerolls die #5, getting J J Q Q Q (full house)
-    * Player 2 rerolls dice 3-5, getting 9 9 J Q K (one pair)
+    * Player 1 sets aside J J Q Q
+    * Player 1 rerolls, getting J J Q Q Q (full house)
+    * Player 2 sets aside 9 9
+    * Player 2 rerolls, getting 9 9 J Q K (one pair)
+    * Player 1 sets aside Q
     * Player 1 stands
-    * Player 2 rerolls dice 3-5, getting 9 9 9 J A (three of a kind)
-    * Player 1 is the winner
+    * Player 2 rerolls, getting 9 9 9 J A (three of a kind)
+    * Player 1 wins the round
