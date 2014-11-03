@@ -12,6 +12,8 @@ Feature: Scoring hands of poker dice
   5 - K (King)
   6 - A (Ace)
 
+  Ace is considered the highest card.
+
   (There are no suits or colors in poker dice.)
 
   Scenario: Bust
