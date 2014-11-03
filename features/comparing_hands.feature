@@ -1,5 +1,7 @@
 Feature: Comparing hands of poker dice
 
+  Identical hands are a "push" (this is apparently poker jargon for "tie").
+
   Scenario Outline: comparing hands of different ranks
     Given player 1 has hand: <Player 1 Hand>
     And player 2 has hand: <Player 2 Hand>
@@ -11,6 +13,7 @@ Feature: Comparing hands of poker dice
       | two pair < three of a kind      | 9 9 Q Q A     | 9 9 9 J K     | Player 2 |
       | three of a kind < straight      | 9 9 9 J K     | T J Q K A     | Player 2 |
       | full house > straight           | 9 9 Q Q Q     | T J Q K A     | Player 1 |
+      | full house < four of a kind     | K K A A A     | 9 Q Q Q Q     | Player 2 |
       | four of a kind > straight       | T T T T A     | T J Q K A     | Player 1 |
       | five of a kind > four of a kind | J J J J J     | 9 A A A A     | Player 1 |
 
@@ -41,5 +44,4 @@ Feature: Comparing hands of poker dice
       | two pair        | 9 9 T A A     | 9 9 Q A A     | Player 2 |
       | three of a kind | 9 J J J Q     | 9 T J J J     | Player 1 |
       | four of a kind  | 9 Q Q Q Q     | Q Q Q Q K     | Player 2 |
-
 
