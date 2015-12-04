@@ -32,7 +32,7 @@ Feature: Comparing hands of poker dice
       | full house, twos match   | J J A A A     | J J Q Q Q     | Player 1 |
       | full house, threes match | Q Q J J J     | T T J J J     | Player 1 |
       | four of a kind           | 9 Q Q Q Q     | Q A A A A     | Player 2 |
-      | five of a kind           | J J J J J     | A A A A A     | Player 2
+      | five of a kind           | J J J J J     | A A A A A     | Player 2 |
 
   Scenario Outline: ties can be broken by the highest non-matching die that doesn't participate in the rank, if there is one
     Given player 1 has hand: <Player 1 Hand>
