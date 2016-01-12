@@ -19,7 +19,7 @@ Feature: Playing a round
     * Player 1 rerolls, getting J J Q Q Q (full house)
     * Player 2 sets aside 9 9
     * Player 2 rerolls, getting 9 9 J Q K (one pair)
-    * Player 1 sets aside Q
     * Player 1 stands
+    * Player 2 sets aside 9 9
     * Player 2 rerolls, getting 9 9 9 J A (three of a kind)
     * Player 1 wins the round
