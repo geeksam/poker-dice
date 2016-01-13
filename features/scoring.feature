@@ -1,6 +1,6 @@
 Feature: Scoring hands of poker dice
 
-  For the purposes of these scenarios, a "poker die" is just some way of
+  For the purposes of these scenarios, a "poker dice" is just some way of
   randomly selecting a value that corresponds to a card in the game of
   poker.  Six-sided dice are used so that the game can be played with
   any dice; the values are translated as follows:
