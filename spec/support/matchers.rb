@@ -1,6 +1,11 @@
 RSpec::Matchers.define :score_as do |expected|
   match do |actual|
-    hand = PokerDice::Hand.new( actual )
+    hand = \
+      case actual
+      when String          ; PokerDice::Hand.new( actual )
+      when PokerDice::Hand ; actual
+      else raise ArgumentError, "Unsure how to score #{actual.inspect}"
+      end
 
     hand.respond_to?(expected) && positives_for( hand ) == [ expected ]
   end

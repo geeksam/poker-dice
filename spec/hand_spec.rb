@@ -36,6 +36,32 @@ RSpec.describe PokerDice::Hand do
     end
   end
 
+  describe "rerolling dice in a hand" do
+    specify "asking a Hand to reroll returns a new Hand with (possibly) different dice" do
+      hand1 = described_class.new( "J J Q Q K" )
+      expect( hand1 ).to score_as( :two_pair? ) # precondition check
+
+      allow( hand1 ).to receive( :roll_die ).and_return( "Q" ).once
+
+      hand2 = hand1.reroll( "J J Q Q *" ) # the asterisk means 'reroll'
+      expect( hand2 ).to score_as( :full_house? )
+    end
+
+    specify "up to five dice can be rerolled" do
+      hand1 = described_class.new( "A K Q J 9" )
+      expect( hand1 ).to score_as( :busted? ) # precondition check
+
+      allow( hand1 ).to receive( :roll_die ).and_return( "T" ).ordered
+      allow( hand1 ).to receive( :roll_die ).and_return( "J" ).ordered
+      allow( hand1 ).to receive( :roll_die ).and_return( "Q" ).ordered
+      allow( hand1 ).to receive( :roll_die ).and_return( "K" ).ordered
+      allow( hand1 ).to receive( :roll_die ).and_return( "A" ).ordered
+
+      hand2 = hand1.reroll( "* * * * *" ) # oh, look, a cron job!
+      expect( hand2 ).to score_as( :straight? )
+    end
+  end
+
   describe "Comparing hands" do
     describe "of different ranks" do
       specify "bust < one pair" do
