@@ -36,29 +36,33 @@ RSpec.describe PokerDice::Hand do
     end
   end
 
+  describe "rolling dice" do
+    let(:expected_range) { %w[ 9 T J Q K A ] }
+
+    specify "returns a string representing a card from nine to ace" do
+      rolled = described_class.roll_die
+      expect( expected_range ).to include( rolled )
+    end
+
+    specify "does the above, but randomly" do
+      rolled = 100.times.map { described_class.roll_die }
+      expect( rolled.uniq.sort ).to eq( expected_range.sort )
+    end
+  end
+
   describe "rerolling dice in a hand" do
-    specify "asking a Hand to reroll returns a new Hand with (possibly) different dice" do
-      hand1 = described_class.new( "J J Q Q K" )
-      expect( hand1 ).to score_as( :two_pair? ) # precondition check
+    specify "Constructing a Hand with '*' cards returns a new Hand with random dice" do
+      allow( described_class ).to receive( :roll_die ).and_return( "Q" ).once
 
-      allow( hand1 ).to receive( :roll_die ).and_return( "Q" ).once
-
-      hand2 = hand1.reroll( "J J Q Q *" ) # the asterisk means 'reroll'
-      expect( hand2 ).to score_as( :full_house? )
+      hand1 = described_class.new( "J J Q Q *" ) # the asterisk means '(re)roll'
+      expect( hand1 ).to score_as( :full_house? )
     end
 
     specify "up to five dice can be rerolled" do
-      hand1 = described_class.new( "A K Q J 9" )
-      expect( hand1 ).to score_as( :busted? ) # precondition check
+      allow( described_class ).to receive( :roll_die ).and_return( "T", "J", "Q", "K", "A" )
 
-      allow( hand1 ).to receive( :roll_die ).and_return( "T" ).ordered
-      allow( hand1 ).to receive( :roll_die ).and_return( "J" ).ordered
-      allow( hand1 ).to receive( :roll_die ).and_return( "Q" ).ordered
-      allow( hand1 ).to receive( :roll_die ).and_return( "K" ).ordered
-      allow( hand1 ).to receive( :roll_die ).and_return( "A" ).ordered
-
-      hand2 = hand1.reroll( "* * * * *" ) # oh, look, a cron job!
-      expect( hand2 ).to score_as( :straight? )
+      hand1 = described_class.new( "* * * * *" ) # oh, look, a cron job!
+      expect( hand1 ).to score_as( :straight? )
     end
   end
 
