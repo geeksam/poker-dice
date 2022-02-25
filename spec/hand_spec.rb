@@ -44,8 +44,8 @@ RSpec.describe PokerDice::Hand do
 
 
   describe "rolling dice" do
-=begin
     let(:expected_range) { %w[ 9 T J Q K A ] }
+=begin
 
     specify "returns a string representing a card from nine to ace" do
       rolled = described_class.roll_die
@@ -78,12 +78,12 @@ RSpec.describe PokerDice::Hand do
   end
 
   describe "Comparing hands" do
-=begin
     describe "of different ranks" do
       specify "bust < one pair" do
         expect( "9 J Q K A" ).to score_below( "9 T T Q K" )
       end
 
+=begin
       specify "two pair > one pair" do
         expect( "9 9 Q Q A" ).to score_above( "9 T T Q K" )
       end
@@ -111,9 +111,11 @@ RSpec.describe PokerDice::Hand do
       specify "five of a kind > four of a kind" do
         expect( "J J J J J" ).to score_above( "9 A A A A" )
       end
+=end
     end
 
     describe "within the same rank" do
+=begin
       specify "one pair" do
         expect( "T T J Q A" ).to score_below( "9 T J J K" )
       end
@@ -153,9 +155,11 @@ RSpec.describe PokerDice::Hand do
       specify "five of a kind" do
         expect( "J J J J J" ).to score_below( "A A A A A" )
       end
+=end
     end
 
     describe "ties can be broken by the highest non-matching die that doesn't participate in the rank, if there is one" do
+=begin
       specify "one pair" do
         expect( "T T J Q A" ).to score_below( "T T Q K A" )
       end
@@ -171,8 +175,8 @@ RSpec.describe PokerDice::Hand do
       specify "four of a kind" do
         expect( "9 Q Q Q Q" ).to score_below( "Q Q Q Q K" )
       end
-    end
 =end
+    end
   end
 
 end
