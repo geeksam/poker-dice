@@ -36,7 +36,15 @@ RSpec.describe PokerDice::Hand do
     end
   end
 
+
+
+  ########################################################################################
+  ########################################################################################
+
+
+
   describe "rolling dice" do
+=begin
     let(:expected_range) { %w[ 9 T J Q K A ] }
 
     specify "returns a string representing a card from nine to ace" do
@@ -48,9 +56,11 @@ RSpec.describe PokerDice::Hand do
       rolled = 100.times.map { described_class.roll_die }
       expect( rolled.uniq.sort ).to eq( expected_range.sort )
     end
+=end
   end
 
   describe "rerolling dice in a hand" do
+=begin
     specify "Constructing a Hand with '*' cards returns a new Hand with random dice" do
       allow( described_class ).to receive( :roll_die ).and_return( "Q" ).once
 
@@ -64,9 +74,11 @@ RSpec.describe PokerDice::Hand do
       hand1 = described_class.new( "* * * * *" ) # oh, look, a cron job!
       expect( hand1 ).to score_as( :straight? )
     end
+=end
   end
 
   describe "Comparing hands" do
+=begin
     describe "of different ranks" do
       specify "bust < one pair" do
         expect( "9 J Q K A" ).to score_below( "9 T T Q K" )
@@ -160,6 +172,7 @@ RSpec.describe PokerDice::Hand do
         expect( "9 Q Q Q Q" ).to score_below( "Q Q Q Q K" )
       end
     end
+=end
   end
 
 end
